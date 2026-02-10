@@ -6,6 +6,10 @@
 [![React](https://img.shields.io/badge/UI-React%20%2B%20Ink-61dafb?logo=react)](https://github.com/vadimdemedes/ink)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+<img width="1003" height="661" alt="SCR-20260210-gowd" src="https://github.com/user-attachments/assets/302bc1ef-a1f3-4934-bff2-35ff2dcea377" />
+
+<img width="993" height="639" alt="SCR-20260210-goyg" src="https://github.com/user-attachments/assets/02d965cf-b6f1-400f-9c24-6d80662c87e0" />
+
 ---
 
 ## Overview
