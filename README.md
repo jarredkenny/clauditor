@@ -1,21 +1,10 @@
-<![CDATA[<div align="center">
-
-```
-     ██████╗██╗      █████╗ ██╗   ██╗██████╗ ██╗████████╗ ██████╗ ██████╗
-    ██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██║╚══██╔══╝██╔═══██╗██╔══██╗
-    ██║     ██║     ███████║██║   ██║██║  ██║██║   ██║   ██║   ██║██████╔╝
-    ██║     ██║     ██╔══██║██║   ██║██║  ██║██║   ██║   ██║   ██║██╔══██╗
-    ╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝██║   ██║   ╚██████╔╝██║  ██║
-     ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-```
+# Clauditor
 
 **A terminal UI for monitoring and managing Claude Code sessions**
 
 [![Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun)](https://bun.sh)
 [![React](https://img.shields.io/badge/UI-React%20%2B%20Ink-61dafb?logo=react)](https://github.com/vadimdemedes/ink)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
-</div>
 
 ---
 
@@ -45,7 +34,7 @@ All actions propagate to child processes, including MCP servers, test runners, t
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/clauditor.git
+git clone https://github.com/jarredkenny/clauditor.git
 cd clauditor
 
 # Install dependencies
@@ -98,12 +87,15 @@ bun run start
 ### Actions
 
 #### Pause (`p`)
+
 Sends `SIGSTOP` to the Claude process and all its descendants. The process tree is frozen in place—no CPU cycles consumed—but remains in memory for instant resumption. Useful for temporarily freeing resources without losing session state.
 
 #### Resume (`r`)
+
 Sends `SIGCONT` to resume a paused process tree. The session continues exactly where it left off.
 
 #### Kill (`K`)
+
 Terminates the process and all children with `SIGKILL`. A confirmation modal prevents accidental termination.
 
 ---
@@ -199,12 +191,3 @@ The process list refreshes every 2 seconds. If this causes performance issues, y
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
-
----
-
-<div align="center">
-
-**Built for developers who run Claude at scale**
-
-</div>
-]]>
