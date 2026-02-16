@@ -103,7 +103,7 @@ export function ProcessList({ processes, selectedIndex, sortMode }: ProcessListP
           <Box
             key={proc.pid}
             paddingX={1}
-            backgroundColor={isSelected ? "blue" : undefined}
+            backgroundColor={isSelected ? "#333333" : undefined}
           >
             <Box width={2}>{getSelectionIndicator(isSelected)}</Box>
             <Box width={3}>{getStateIndicator(proc.state)}</Box>
@@ -118,8 +118,8 @@ export function ProcessList({ processes, selectedIndex, sortMode }: ProcessListP
             </Box>
             <Box width={8}>
               <Text
-                color={isPaused ? "gray" : getCpuColor(proc.totalCpu)}
-                bold={!isPaused && proc.totalCpu > 50}
+                color={isSelected ? "white" : isPaused ? "gray" : getCpuColor(proc.totalCpu)}
+                bold={isSelected || (!isPaused && proc.totalCpu > 50)}
                 dimColor={isPaused && !isSelected}
               >
                 {formatCpu(proc.totalCpu)}
@@ -127,15 +127,19 @@ export function ProcessList({ processes, selectedIndex, sortMode }: ProcessListP
             </Box>
             <Box width={8}>
               <Text
-                color={isPaused ? "gray" : getMemColor(proc.totalMem)}
-                bold={!isPaused && proc.totalMem > 25}
+                color={isSelected ? "white" : isPaused ? "gray" : getMemColor(proc.totalMem)}
+                bold={isSelected || (!isPaused && proc.totalMem > 25)}
                 dimColor={isPaused && !isSelected}
               >
                 {formatMem(proc.totalMem)}
               </Text>
             </Box>
             <Box width={8}>
-              <Text dimColor={proc.children.length === 0 || isPaused}>
+              <Text
+                color={isSelected ? "white" : undefined}
+                bold={isSelected}
+                dimColor={!isSelected && (proc.children.length === 0 || isPaused)}
+              >
                 {proc.children.length > 0 ? proc.children.length : "-"}
               </Text>
             </Box>
@@ -150,7 +154,12 @@ export function ProcessList({ processes, selectedIndex, sortMode }: ProcessListP
               </Text>
             </Box>
             <Box flexGrow={1}>
-              <Text dimColor={!isSelected || isPaused} wrap="truncate">
+              <Text
+                color={isSelected ? "white" : undefined}
+                bold={isSelected}
+                dimColor={!isSelected && isPaused}
+                wrap="truncate"
+              >
                 {workDir}
               </Text>
             </Box>
