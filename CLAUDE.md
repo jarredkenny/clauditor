@@ -26,6 +26,7 @@ bun run src/index.tsx
 | `K` | Kill selected process (with confirmation) |
 | `p` | Pause selected process |
 | `r` | Resume paused process |
+| `s` | Cycle sort: Project → CPU → Memory → PID |
 | `R` | Manual refresh |
 | `q` | Quit |
 

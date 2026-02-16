@@ -73,6 +73,7 @@ bun run start
 | `p` | **Pause** selected process and all children |
 | `r` | **Resume** selected process and all children |
 | `K` | **Kill** selected process and all children |
+| `s` | **Cycle sort**: Project → CPU → Memory → PID |
 | `R` | Force refresh process list |
 | `q` | Quit |
 

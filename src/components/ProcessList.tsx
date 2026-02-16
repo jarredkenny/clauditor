@@ -2,10 +2,12 @@ import React from "react";
 import { Box, Text } from "ink";
 import type { ClaudeProcess } from "../utils/process.js";
 import { extractProjectName, shortenPath } from "../utils/process.js";
+import type { SortMode } from "../App.js";
 
 interface ProcessListProps {
   processes: ClaudeProcess[];
   selectedIndex: number;
+  sortMode: SortMode;
 }
 
 function getStateIndicator(state: "running" | "paused"): React.ReactNode {
@@ -40,7 +42,7 @@ function formatMem(mem: number): string {
   return mem.toFixed(1).padStart(5) + "%";
 }
 
-export function ProcessList({ processes, selectedIndex }: ProcessListProps) {
+export function ProcessList({ processes, selectedIndex, sortMode }: ProcessListProps) {
   if (processes.length === 0) {
     return (
       <Box
@@ -66,19 +68,19 @@ export function ProcessList({ processes, selectedIndex }: ProcessListProps) {
           <Text dimColor>ST</Text>
         </Box>
         <Box width={8}>
-          <Text dimColor>PID</Text>
+          <Text dimColor={sortMode !== "pid"} color={sortMode === "pid" ? "cyan" : undefined}>PID{sortMode === "pid" ? " ▼" : ""}</Text>
         </Box>
         <Box width={8}>
-          <Text dimColor>CPU</Text>
+          <Text dimColor={sortMode !== "cpu"} color={sortMode === "cpu" ? "cyan" : undefined}>CPU{sortMode === "cpu" ? " ▼" : ""}</Text>
         </Box>
         <Box width={8}>
-          <Text dimColor>MEM</Text>
+          <Text dimColor={sortMode !== "mem"} color={sortMode === "mem" ? "cyan" : undefined}>MEM{sortMode === "mem" ? " ▼" : ""}</Text>
         </Box>
         <Box width={8}>
           <Text dimColor>CHILD</Text>
         </Box>
         <Box width={20}>
-          <Text dimColor>PROJECT</Text>
+          <Text dimColor={sortMode !== "project"} color={sortMode === "project" ? "cyan" : undefined}>PROJECT{sortMode === "project" ? " ▼" : ""}</Text>
         </Box>
         <Box flexGrow={1}>
           <Text dimColor>WORKING DIR</Text>

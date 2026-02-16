@@ -1,12 +1,22 @@
 import React from "react";
 import { Box, Text } from "ink";
 
+import type { SortMode } from "../App.js";
+
+const SORT_LABELS: Record<SortMode, string> = {
+  project: "Project",
+  cpu: "CPU",
+  mem: "Memory",
+  pid: "PID",
+};
+
 interface StatusBarProps {
   message?: string;
   isError?: boolean;
+  sortMode: SortMode;
 }
 
-export function StatusBar({ message, isError }: StatusBarProps) {
+export function StatusBar({ message, isError, sortMode }: StatusBarProps) {
   return (
     <Box
       flexDirection="column"
@@ -39,6 +49,11 @@ export function StatusBar({ message, isError }: StatusBarProps) {
         <Text>
           <Text color="green" bold>r</Text>
           <Text dimColor> Resume</Text>
+        </Text>
+        <Text dimColor>|</Text>
+        <Text>
+          <Text color="blue" bold>s</Text>
+          <Text dimColor> Sort: {SORT_LABELS[sortMode]}</Text>
         </Text>
         <Text dimColor>|</Text>
         <Text>

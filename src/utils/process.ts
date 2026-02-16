@@ -88,8 +88,7 @@ export async function getClaudeProcesses(): Promise<ClaudeProcess[]> {
       })
     );
 
-    // Sort by total CPU usage descending
-    return processes.sort((a, b) => b.totalCpu - a.totalCpu);
+    return processes;
   } catch (error) {
     // No Claude processes found
     return [];

@@ -13,6 +13,9 @@ import {
   type ClaudeProcess,
 } from "./utils/process.js";
 
+export type SortMode = "project" | "cpu" | "mem" | "pid";
+const SORT_CYCLE: SortMode[] = ["project", "cpu", "mem", "pid"];
+
 type ModalState = {
   show: boolean;
   action: "kill" | "pause" | "resume";
@@ -29,6 +32,21 @@ export function App() {
     show: false,
     action: "kill",
     process: null,
+  });
+  const [sortMode, setSortMode] = useState<SortMode>("project");
+
+  // Sort processes
+  const sortedProcesses = [...processes].sort((a, b) => {
+    switch (sortMode) {
+      case "project":
+        return extractProjectName(a).localeCompare(extractProjectName(b));
+      case "cpu":
+        return b.totalCpu - a.totalCpu;
+      case "mem":
+        return b.totalMem - a.totalMem;
+      case "pid":
+        return a.pid - b.pid;
+    }
   });
 
   // Calculate totals (using aggregated metrics that include children)
@@ -69,8 +87,8 @@ export function App() {
     setTimeout(() => setMessage(null), 3000);
   };
 
-  // Get currently selected process
-  const selectedProcess = processes[selectedIndex] || null;
+  // Get currently selected process (from sorted list)
+  const selectedProcess = sortedProcesses[selectedIndex] || null;
 
   // Handle modal confirm
   const handleModalConfirm = async () => {
@@ -161,6 +179,13 @@ export function App() {
           showMessage("Process is already running.", true);
         }
       }
+      // Sort toggle
+      else if (input === "s") {
+        setSortMode((prev) => {
+          const idx = SORT_CYCLE.indexOf(prev);
+          return SORT_CYCLE[(idx + 1) % SORT_CYCLE.length]!;
+        });
+      }
       // Refresh (capital R)
       else if (input === "R") {
         setLoading(true);
@@ -202,10 +227,10 @@ export function App() {
           onCancel={handleModalCancel}
         />
       ) : (
-        <ProcessList processes={processes} selectedIndex={selectedIndex} />
+        <ProcessList processes={sortedProcesses} selectedIndex={selectedIndex} sortMode={sortMode} />
       )}
 
-      <StatusBar message={message?.text} isError={message?.isError} />
+      <StatusBar message={message?.text} isError={message?.isError} sortMode={sortMode} />
     </Box>
   );
 }
